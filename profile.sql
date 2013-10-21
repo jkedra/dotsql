@@ -9,7 +9,7 @@ SELECT username,profile,account_status,lock_date,expiry_date
 	WHERE username LIKE 'APP%'
 		OR username LIKE 'TAS%'
 		OR username LIKE 'AA%'
-		OR username = 'OEMDEFAULT';
+		OR username IN ('OEMDEFAULT', 'ASDM', 'AUTOUSER');
 
 SELECT DISTINCT profile
 	FROM dba_profiles;
