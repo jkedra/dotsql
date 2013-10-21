@@ -1,0 +1,54 @@
+
+
+***********************************************************************
+Fatal NI connect error 12505, connecting to:
+ (DESCRIPTION=(ADDRESS=(COMMUNITY=tcp_comm.dev.sabre.com)(PROTOCOL=TCP)(Host=nitrogen.dev.sabre.com)(Port=1521))(CONNECT_DATA=(SID=asuadev1)(GLOBAL_NAME=asuadev1)(CID=(PROGRAM=sqlplus)(HOST=solaris9)(USER=sg891757))))
+
+  VERSION INFORMATION:
+	TNS for Solaris: Version 10.2.0.2.0 - Production
+	TCP/IP NT Protocol Adapter for Solaris: Version 10.2.0.2.0 - Production
+  Time: 02-FEB-2010 09:51:59
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12505, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=hydrogen)(Port=1521))(CONNECT_DATA=(SID=asbadev1)(CID=(PROGRAM=sqlplus)(HOST=solaris9)(USER=sg891757))))
+
+  VERSION INFORMATION:
+	TNS for Solaris: Version 10.2.0.2.0 - Production
+	TCP/IP NT Protocol Adapter for Solaris: Version 10.2.0.2.0 - Production
+  Time: 13-MAY-2010 08:15:09
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12505, connecting to:
+ (DESCRIPTION=(ADDRESS=(COMMUNITY=tcp_comm.dev.sabre.com)(PROTOCOL=TCP)(Host=nitrogen.dev.sabre.com)(Port=1521))(CONNECT_DATA=(SID=asuadev1)(GLOBAL_NAME=asuadev1)(CID=(PROGRAM=sqlplus)(HOST=solaris9)(USER=sg891757))))
+
+  VERSION INFORMATION:
+	TNS for Solaris: Version 10.2.0.2.0 - Production
+	TCP/IP NT Protocol Adapter for Solaris: Version 10.2.0.2.0 - Production
+  Time: 13-MAY-2010 08:16:18
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0

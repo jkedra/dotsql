@@ -1,0 +1,3 @@
+#!/bin/bash
+(cd ..; tar czf sql.tgz .sql)
+ssh-agent ./0synchro.sh
