@@ -9,6 +9,7 @@ SELECT username,profile,account_status,lock_date,expiry_date
 	WHERE username LIKE 'APP%'
 		OR username LIKE 'TAS%'
 		OR username LIKE 'AA%'
+		OR username LIKE 'ASV%'
 		OR username IN ('OEMDEFAULT', 'ASDM', 'AUTOUSER');
 
 SELECT DISTINCT profile
@@ -21,7 +22,8 @@ BREAK ON profile
 
 SELECT profile,resource_name,limit
 	FROM dba_profiles
-	WHERE profile IN ('SABRE_NONEXPIRING','MONITORING_PROFILE','DEFAULT')
+	WHERE profile IN ('MONITORING_PROFILE','DEFAULT')
+		OR profile LIKE 'SABRE%'
 	ORDER by profile,resource_name;
 
 
