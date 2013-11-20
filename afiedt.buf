@@ -1,2 +1,0 @@
-alter profile sabre_nonexpiring limit failed_login_attempts unlimited
-/
