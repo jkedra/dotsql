@@ -2,6 +2,7 @@
 -- find_sql version for all instances (g version)
 set verify off
 set pagesize 999
+SET NUMWIDTH 3
 col username format a13
 col prog format a22
 col sql_text format a41
@@ -11,8 +12,10 @@ col ocategory format a10
 col avg_etime format 9,999,999.99
 col etime format 9,999,999.99
 
-SELECT sql_id, child_number, plan_hash_value plan_hash, inst_id,
-	executions execs, elapsed_time/1000000 etime,
+COL sqlid HEADING "sql_id|plan_hash" FORMAT A13
+
+SELECT sql_id||'  '||plan_hash_value sqlid, child_number, inst_id ins,
+	executions excs, elapsed_time/1000000 etime,
 	(elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions) avg_etime,
 	u.username, sql_text
 FROM gv$sql s, dba_users u
