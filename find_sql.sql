@@ -1,3 +1,6 @@
+-- vim:ts=4
+-- non RAC version
+-- The RAC version is named gfind_sql
 set verify off
 set pagesize 999
 col username format a13
