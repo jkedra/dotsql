@@ -292,6 +292,7 @@ where   L.SID = S.SID
 and     T1.OBJ#  = decode(L.ID2,0,L.ID1,1)  
 and     U1.USER# = T1.OWNER# 
 and     S.TYPE != 'BACKGROUND' 
+and	l.type<>'AE' 
 order by 1,2,5 
 / 
 
