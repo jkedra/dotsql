@@ -1,8 +1,10 @@
 set verify off
 set pagesize 999
+set LINES 160
 col username format a13
 col prog format a22
-col sql_text format a41
+col sql_full format a100 word_wrapped
+col sql_fulltext format A100 word_wrapped
 col sid format 999
 col child_number format 99999 heading CHILD
 col ocategory format a10
