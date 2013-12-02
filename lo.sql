@@ -1,6 +1,6 @@
 -- (c) Jerzy Kêdra 01.2003 
 
-SET FEEDBACK OFF
+SET FEEDBACK OFF ECHO OFF
 
 col opname format a10
 col target format a10
