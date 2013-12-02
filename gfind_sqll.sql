@@ -25,16 +25,12 @@ SELECT /* sq9mcp */ sql_id||'  '||plan_hash_value sqlid, child_number, inst_id i
 	u.username, sql_fulltext
 FROM gv$sql s, dba_users u
 WHERE upper(sql_fulltext) LIKE upper(nvl(q'{%&sql_text%}',sql_fulltext))
-<<<<<<< HEAD
 	AND NOT
 	(
 		sql_text LIKE '%sq9mcp%' OR
 		sql_text LIKE 'EXPLAIN PLAN %' OR
 		sql_text LIKE '%v$sql s, dba_users u%'
 	)
-=======
-	AND  sql_text NOT LIKE '% sq9mcp %'
->>>>>>> a232f75edefbcc91946698ef85d4a51c4e919f24
 	AND sql_id LIKE nvl('&sql_id',sql_id)
 	AND u.user_id = s.parsing_user_id
 /
