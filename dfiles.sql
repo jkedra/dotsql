@@ -1,4 +1,4 @@
-col fid format 99
+col fid format 999
 col tablespace_name format a15
 col file_name format a50
 select tablespace_name,file_id fid,file_name
