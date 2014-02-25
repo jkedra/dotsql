@@ -12,7 +12,6 @@ COL duration            FORMAT A10 TRUNCATED
 COL job_name		FORMAT A21
 COL job_info		FORMAT A30 TRUNCATED
 
-PROMPT Invoke with extra parameter do specify perdiod length.
 PROMPT By default only last 24hrs are displayed.
 ACCEPT vdays  CHAR PROMPT "days [1]: "
 
@@ -28,4 +27,7 @@ WHERE job_start_time > SYSDATE - NVL('&vdays', '1')
 ORDER BY window_start_time;
 
 SET FEEDBACK ON
+
+PROMPT Use following query for job name description:
+PROMPT SELECT * FROM DBA_AUTOTASK_OPERATION;
 
