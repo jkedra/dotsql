@@ -23,12 +23,13 @@ SET TERMOUT OFF
 ALTER SESSION SET NLS_DATE_FORMAT='HH24:MI';
 SET TERMOUT ON
 
-SELECT  target,round(sofar/(totalwork+.0001)*100) totalwork,
+SELECT  SUBSTR(1,1, inst_id) i,
+	target,round(sofar/(totalwork+.0001)*100) totalwork,
 	start_time,
 	round(time_remaining/60,1) time_remaining,
 	round(elapsed_seconds/60,1) minutes_elapsed,
 	message||CHR(10)||sql_id msg,username
-FROM	v$session_longops
+FROM	gv$session_longops
 WHERE	sofar <> totalwork
 /
 
