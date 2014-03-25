@@ -1,8 +1,17 @@
-SET LINES 120
-COL PCTUSED format A7
-COL PCTRECL format A7
-select FILE_TYPE, to_char(PERCENT_SPACE_USED, '99.9')        PCTUSED,
-                  to_char(PERCENT_SPACE_RECLAIMABLE, '99.9') PCTRECL,
+SET LINES 80
+
+COL PCTUSED format 99.9
+COL PCTRECL format 99.9
+
+COMPUTE SUM OF pctused ON report
+COMPUTE SUM OF pctrecl ON report
+BREAK ON report
+
+select FILE_TYPE, round(PERCENT_SPACE_USED, 1)        pctused,
+                  round(PERCENT_SPACE_RECLAIMABLE, 1) pctrecl,
 		NUMBER_OF_FILES FILES
 from v$FLASH_RECOVERY_AREA_USAGE
 /
+
+CLEAR BREAK
+CLEAR COMPUTES
