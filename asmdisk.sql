@@ -1,5 +1,8 @@
 col path format a40
+col dskgrp FORMAT A10
 set lines 160
 
-select name,header_status,state,path from v$asm_disk
+select d.name,d.header_status,d.state,dg.name dskgrp, d.path
+FROM v$asm_disk d, v$asm_diskgroup dg
+WHERE d.group_number=dg.group_number (+)
 /
