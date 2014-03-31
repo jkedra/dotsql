@@ -1,0 +1,25 @@
+SET ECHO OFF FEEDBACK OFF VERIFY OFF TIMING OFF HEAD OFF
+SET TERMOUT OFF
+COL p1 NEW_VALUE dbname
+SELECT global_name p1 FROM global_name;
+COL p1 CLEAR
+
+SET ECHO OFF FEEDBACK ON VERIFY OFF TIMING OFF HEAD ON
+
+SET pages 999
+COL count FORMAT 999,999,999
+
+SPOOL &dbname.-count.txt
+
+SELECT
+   table_name,
+   TO_NUMBER(
+   EXTRACTVALUE(
+      XMLTYPE(
+         DBMS_XMLGEN.GETXML('SELECT COUNT(*) c FROM '||owner||'.'||table_name))
+    ,'/ROWSET/ROW/C')) count
+FROM all_tables
+WHERE OWNER='TASDBA'
+ORDER BY table_name;
+
+SPOOL OFF
