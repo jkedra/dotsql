@@ -1,7 +1,7 @@
 
 col minutes_elapsed     HEADING "Minutes|Elapsed"
-
 COL sql_text FORMAT A40 HEADING "SQL TEXT" word_wrapped
+SET NUMWIDTH 12
 
 
 SELECT inst_id inst,

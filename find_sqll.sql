@@ -37,14 +37,14 @@ WHERE upper(sql_fulltext) LIKE upper(nvl(q'{%&sql_text%}',sql_fulltext))
 
 
 
-SELECT /* sq9mcp */ sql_id, child_number, plan_hash_value plan_hash,
-	executions execs, elapsed_time/1000000 etime,
-	(elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions) avg_etime,
-	u.username, sql_fulltext
-FROM v$sql s, dba_users u
-WHERE UPPER(sql_fulltext) LIKE UPPER(NVL('%&sql_text%',sql_fulltext))
-AND sql_text NOT LIKE '%from v$sql where sql_text like nvl(%'
-AND sql_id LIKE nvl('&sql_id',sql_id)
-AND u.user_id = s.parsing_user_id
-/
+--SELECT /* sq9mcp */ sql_id, child_number, plan_hash_value plan_hash,
+--	executions execs, elapsed_time/1000000 etime,
+--	(elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions) avg_etime,
+--	u.username, sql_fulltext
+--FROM v$sql s, dba_users u
+--WHERE UPPER(sql_fulltext) LIKE UPPER(NVL('%&sql_text%',sql_fulltext))
+--AND sql_text NOT LIKE '%from v$sql where sql_text like nvl(%'
+--AND sql_id LIKE nvl('&sql_id',sql_id)
+--AND u.user_id = s.parsing_user_id
+--/
 
