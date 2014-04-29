@@ -29,7 +29,7 @@ disk_reads/decode(nvl(executions,0),0,1,executions) avg_pio,
 -- buffer_gets lio,
 buffer_gets/decode(nvl(executions,0),0,1,executions) avg_lio,
 sql_text
-from v$sql s
+from gv$sql s
 where sql_text like nvl('&sql_text',sql_text)
 and sql_text not like '%from v$sql where sql_text like nvl(%'
 and address like nvl('&address',address)
