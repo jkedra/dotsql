@@ -68,7 +68,7 @@ PROMPT Pokazuje wszystko co ma returncode <> 0
 PROMPT w ciagu ostatniego tygodnia
 PROMPT UWAGA! SYS NIE MOZE BYC AUDYTOWANY!
 
-SELECT	username, os_username||'@'||terminal as "WHERE", obj_name, returncode,
+SELECT	username, os_username||'@'||nvl(terminal,userhost) as "WHERE", obj_name, returncode,
 	timestamp, priv_used
 FROM dba_audit_trail
 WHERE returncode<>0 AND timestamp > current_timestamp - INTERVAL '7' DAY
