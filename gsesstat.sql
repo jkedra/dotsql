@@ -13,6 +13,7 @@ SELECT username,a.inst_id iid,instance_name iname,
 FROM gv$session a, gv$instance b
 WHERE a.inst_id=b.inst_id
 	AND username IS NOT NULL
+	AND service_name NOT IN ('SYS$BACKGROUND','SYS$USERS')
 GROUP BY username,a.inst_id,instance_name,host_name,service_name
 ORDER BY iid, username, service_name, ses
 /
