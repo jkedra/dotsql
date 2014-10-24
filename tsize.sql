@@ -38,3 +38,5 @@ SELECT * FROM (
             AND temporary='N'
             AND table_name=UPPER('&&table_name')
 ) WHERE sizeinmb IS NOT NULL;
+
+SET VERIFY ON

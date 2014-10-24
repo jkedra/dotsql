@@ -1,3 +1,8 @@
+col program format a20
+col username format a10
+col tablespace format a10
+col osuser format a10
+
 SELECT   b.TABLESPACE
        , b.segfile#
        , b.segblk#
