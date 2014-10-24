@@ -10,14 +10,14 @@ COL start_time HEADING 'start|time'
 COL elapsed_time HEADING 'elapsed|time|minutes' FORMAT A7
 COL disk_reads HEADING 'disk|reads'
 
-SELECT * FROM (
+SET HEADING ON
 SELECT status,user,
 	to_char(sql_exec_start, 'HH24:MI') start_time,
 	LPAD(ROUND(elapsed_time/1024/1024/60,1), 6) elapsed_time,
     disk_reads,
 	sql_id
-FROM v$sql_monitor WHERE username IS NOT NULL
-ORDER BY status DESC, start_time DESC
-)
-WHERE rownum < 100;
+FROM v$sql_monitor
+WHERE username IS NOT NULL and status='EXECUTING'
+ORDER BY status DESC, start_time DESC;
+
 
