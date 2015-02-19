@@ -4,6 +4,7 @@ col avg_etime for 999,999.999
 col avg_lio for 999,999,999.9
 col begin_interval_time for a30
 col node for 99999
+col plan_hash_value format 9999999999
 
 -- DBA_HIST_SQLSTAT
 -- http://docs.oracle.com/cd/E18283_01/server.112/e17110/statviews_4051.htm
