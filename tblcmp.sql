@@ -1,3 +1,8 @@
+-- vim:ts=4:expandtab
+-- default & not null feature added:
+-- ORA-14097 At Exchange Partition After Adding Column With Default Value (Doc ID 1334763.1).
+-- http://blog.trivadis.com/b/danischnider/archive/2014/08/07/sherlock-holmes-and-partition-exchange.aspx
+-- 
 SET LINES 160
 COL DATA_TYPE FORMAT A10
 COL ID        FORMAT 999
@@ -17,8 +22,9 @@ ACCEPT vtype   CHAR PROMPT "type  [ARCH  ]: "
                      data_precision prec,
                      data_scale scale,
                      nullable,
+                     char_used,
                      column_id id
-                FROM all_tab_columns
+                FROM all_tab_cols
                WHERE table_name = UPPER('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
               MINUS
@@ -29,8 +35,9 @@ ACCEPT vtype   CHAR PROMPT "type  [ARCH  ]: "
                      data_precision prec,
                      data_scale scale,
                      nullable,
+                     char_used,
                      column_id id
-                FROM all_tab_columns
+                FROM all_tab_cols
                WHERE table_name = UPPER(NVL('&vtype.','ARCH')) ||
                                   '_'|| UPPER ('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
@@ -44,8 +51,9 @@ UNION
                      data_precision prec,
                      data_scale scale,
                      nullable,
+                     char_used,
                      column_id id
-                FROM all_tab_columns
+                FROM all_tab_cols
                WHERE table_name = UPPER(NVL('&vtype.','ARCH')) ||
                                   '_'|| UPPER ('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
@@ -57,9 +65,17 @@ UNION
                      data_precision prec,
                      data_scale scale,
                      nullable,
+                     char_used,
                      column_id id
-                FROM all_tab_columns
+                FROM all_tab_cols
                WHERE table_name = UPPER('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
 )               
 ORDER BY 8;
+
+SELECT c.name, c.property
+ FROM SYS.col$ c
+ JOIN SYS.obj$ o ON (o.obj# = c.obj#)
+ JOIN dba_users u ON (u.user_id = o.owner#)
+WHERE o.NAME = UPPER('&vtable') AND u.username=UPPER(NVL('&vschema','TASDBA'))
+AND c.property<>0;
