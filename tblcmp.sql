@@ -13,8 +13,14 @@ SET VERIFY OFF
 PROMPT TYPE can be ARCH or EXCH
 ACCEPT vschema CHAR PROMPT "schema[TASDBA]: "
 ACCEPT vtable  CHAR PROMPT "table [      ]: "
-ACCEPT vtype   CHAR PROMPT "type  [ARCH  ]: "
+ACCEPT vtype   CHAR PROMPT "type  [ EXCH ]: "
 
+PROMPT
+PROMPT +======================================+
+PROMPT |  N  - nullable   | H - hidden column |
+PROMPT | ID - column id   |                   |
+PROMPT |  C  - char used  |                   |
+PROMPT +======================================+
 (             SELECT 'ORG' tbl,
 		     column_name,
                      data_type,
@@ -22,7 +28,8 @@ ACCEPT vtype   CHAR PROMPT "type  [ARCH  ]: "
                      data_precision prec,
                      data_scale scale,
                      nullable,
-                     char_used,
+                     char_used c,
+                     DECODE(hidden_column, 'YES', 'Y', 'NO', '') h,
                      column_id id
                 FROM all_tab_cols
                WHERE table_name = UPPER('&vtable')
@@ -35,10 +42,11 @@ ACCEPT vtype   CHAR PROMPT "type  [ARCH  ]: "
                      data_precision prec,
                      data_scale scale,
                      nullable,
-                     char_used,
+                     char_used c,
+                     DECODE(hidden_column, 'YES', 'Y', 'NO', '') h,
                      column_id id
                 FROM all_tab_cols
-               WHERE table_name = UPPER(NVL('&vtype.','ARCH')) ||
+               WHERE table_name = UPPER(NVL('&vtype.','EXCH')) ||
                                   '_'|| UPPER ('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
 )
@@ -51,10 +59,11 @@ UNION
                      data_precision prec,
                      data_scale scale,
                      nullable,
-                     char_used,
+                     char_used c,
+                     DECODE(hidden_column, 'YES', 'Y', 'NO', '') h,
                      column_id id
                 FROM all_tab_cols
-               WHERE table_name = UPPER(NVL('&vtype.','ARCH')) ||
+               WHERE table_name = UPPER(NVL('&vtype.','EXCH')) ||
                                   '_'|| UPPER ('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
              MINUS
@@ -65,7 +74,8 @@ UNION
                      data_precision prec,
                      data_scale scale,
                      nullable,
-                     char_used,
+                     char_used c,
+                     DECODE(hidden_column, 'YES', 'Y', 'NO', '') h,
                      column_id id
                 FROM all_tab_cols
                WHERE table_name = UPPER('&vtable')
