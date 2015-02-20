@@ -83,9 +83,18 @@ UNION
 )               
 ORDER BY 8;
 
+PROMPT == unusual column properties ==
 SELECT c.name, c.property
  FROM SYS.col$ c
  JOIN SYS.obj$ o ON (o.obj# = c.obj#)
  JOIN dba_users u ON (u.user_id = o.owner#)
 WHERE o.NAME = UPPER('&vtable') AND u.username=UPPER(NVL('&vschema','TASDBA'))
 AND c.property<>0;
+
+PROMPT == dba_unused_col_tabs ==
+SELECT table_name,count
+FROM dba_unused_col_tabs
+WHERE owner=UPPER(NVL('&vschema','TASDBA'))
+  AND table_name=UPPER('&vtable');
+
+
