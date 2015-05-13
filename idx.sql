@@ -1,11 +1,11 @@
--- jxa
+-- jurek.kedra@gmail.com
 -- informacje o indeksie
 --
 SET ECHO OFF
 SET VERIFY OFF
 SET SERVEROUTPUT ON
 
-ACCEPT schema_name PROMPT 'Enter schema name [CNP]            : ' DEFAULT CNP
+ACCEPT schema_name PROMPT 'Enter schema name [TASDBA]            : ' DEFAULT TASDBA
 ACCEPT index_name  PROMPT 'Enter index name  [konto_slot_fk_i]: ' DEFAULT konto_slot_fk_i
 
 PROMPT ==
