@@ -46,6 +46,7 @@ accept days_ago -
        default '1'
 
 set lines 155
+set verify off
 col execs for 999,999,999
 col before_etime for 999,990.99
 col after_etime for 999,990.99
