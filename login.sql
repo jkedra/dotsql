@@ -40,11 +40,19 @@ set LONG 5000
 
 define gname=idle
 column global_name new_value gname
+/*
 select user||'@'|| substr(global_name,1,
 	-- jezeli INSTR nie znajdzie "." (dot=0) to substr nie obcina - pelna dlugosc
 	-- jezeli INSTR znajdzie kropke, obetnij string przed nia
 	decode(dot, 0, length(global_name), dot-1) ) global_name
 	from (select global_name, instr(global_name,'.') dot from global_name);
+*/
+select user||'@'|| substr(instance_name,1,
+	-- jezeli INSTR nie znajdzie "." (dot=0) to substr nie obcina - pelna dlugosc
+	-- jezeli INSTR znajdzie kropke, obetnij string przed nia
+	decode(dot, 0, length(instance_name), dot-1) ) global_name
+	from (select instance_name, instr(instance_name,'.') dot from v$instance);
+
 set SQLPROMPT '&&gname> '
 
 alter session set nls_date_format='DD.MM.YY HH24:MI:SS';
