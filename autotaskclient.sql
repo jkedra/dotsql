@@ -1,5 +1,6 @@
 -- 25.02.2014
 -- jurek@kedra.org
+-- http://docs.oracle.com/cd/E11882_01/server.112/e25494/tasks.htm
 --
 COL client_name			FORMAT A30 TRUNCATED
 COL mean_job_duration		FORMAT A20

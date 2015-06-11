@@ -1,3 +1,5 @@
+-- jurek@kedra.org
+-- http://docs.oracle.com/cd/E11882_01/server.112/e25494/tasks.htm
 SET LINES 140
 SET PAGES 80
 SET VERIFY OFF
