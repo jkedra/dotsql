@@ -9,7 +9,7 @@ PROMPT TRANSACTIONS PICTURE
 
 SELECT  ss.username, ss.sid||'.'||serial# sidser,
         ss.status sess_stat, t.status TRANS_STAT,t.start_date, t.ptx, t.name,
-        ROUND(t.USED_UBLK * (select block_size from dba_tablespaces 
+        ROUND(t.USED_UBLK * (select max(block_size) from dba_tablespaces 
                     WHERE contents='UNDO') /1024/1024) UNDO_MB,
         t.cr_get,t.cr_change
 FROM v$transaction t, v$rollstat rs, v$rollname rn, v$session ss
