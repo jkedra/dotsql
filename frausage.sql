@@ -1,7 +1,7 @@
 SET LINES 80
 
-COL PCTUSED format 99.9
-COL PCTRECL format 99.9
+COL PCTUSED format 999.9
+COL PCTRECL format 999.9
 
 COMPUTE SUM OF pctused ON report
 COMPUTE SUM OF pctrecl ON report

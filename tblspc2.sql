@@ -16,6 +16,7 @@ prompt B   - BIGFILE ?
 prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+-- todo: select * from dba_tablespace_usage_metrics; 
 --
 -- sume rozmiarow brac z bytes/dba_data_files
 -- od sumy rozmiarow odejmowac ilosc wolnego miejsca

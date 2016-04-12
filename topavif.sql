@@ -11,7 +11,7 @@ SELECT table_name, (    SELECT ROUND(SUM(NVL(bytes,0))/1024/1024) "total MB"
                             WHERE owner=dt.owner and table_name=dt.table_name
                         )
                   ) total_size_MB
-FROM dba_tables dt WHERE owner='TASDBA' AND temporary='N'
+FROM dba_tables dt WHERE owner IN ('TASDBA', 'ASDM') AND temporary='N'
 ORDER BY 2 DESC NULLS LAST
 ) WHERE ROWNUM<11;
 

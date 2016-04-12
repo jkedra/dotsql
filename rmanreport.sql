@@ -5,6 +5,9 @@
 --
 
 SPOOL /tmp/rmanreport.txt
+COL global_name FORMAT A20
+SELECT SYSDATE, global_name FROM global_name;
+
 SET LINES 150
 COL duration FORMAT A8
 COL output_size FORMAT A10

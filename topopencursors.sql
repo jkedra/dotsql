@@ -1,3 +1,4 @@
+col sidser format a20
 
 SELECT * FROM (
 SELECT oc.inst_id,oc.sid||','||s.serial# sidser ,count(*) from gv$open_cursor oc, gv$session s

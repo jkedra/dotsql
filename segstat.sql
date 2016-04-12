@@ -4,6 +4,8 @@ col type format A20
 col tblspc FORMAT A16
 col stname FORMAT A20
 col object format A45
+col value format 99999
+
 SELECT ROWNUM id, object, type, tblspc, stname, value FROM (
     SELECT rownum, owner||'.'||object_name||
            NVL2(subobject_name, ' PART('||subobject_name||')', '') object,

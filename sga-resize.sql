@@ -1,9 +1,8 @@
 SET LINES 160
-COL component FORMAT A20
+COL component FORMAT A25
 
 PROMPT By default last 7 days are displayed.
-ACCEPT vdays  CHAR PROMPT "days [7]: "
-
+ACCEPT vdays CHAR DEFAULT 7 PROMPT "days [7]: "
 
 SELECT start_time,inst_id,component, oper_type, oper_mode,
        initial_size/1024/1024 "INITIAL", TARGET_SIZE/1024/1024
