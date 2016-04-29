@@ -2,11 +2,14 @@ COL parameter FORMAT A30
 COL value     FORMAT A30
 
 PROMPT SESSION
-SELECT * FROM nls_session_parameters;
+SELECT * FROM nls_session_parameters
+ORDER BY parameter;
 
 PROMPT INSTANCE
-select * FROM NLS_INSTANCE_PARAMETERS;
+SELECT * FROM nls_instance_parameters
+ORDER BY parameter;
 
 PROMPT DATABASE
-select * from NLS_DATABASE_PARAMETERS;
+SELECT * FROM nls_database_parameters
+ORDER BY parameter;
 
