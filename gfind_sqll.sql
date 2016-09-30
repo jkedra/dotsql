@@ -5,8 +5,8 @@
 -- because sql_fulltext was LONG (now CLOB) and LIKE didn't work
 set verify off
 SET pagesize 999
-SET LINESIZE 160
-SET NUMWIDTH 3
+SET LINESIZE 170
+SET NUMWIDTH 8
 SET LONG 32000
 col username format a13
 col prog format a22
@@ -16,10 +16,20 @@ col child_number format 99999 heading CHILD
 col ocategory format a10
 col avg_etime format 9,999,999.99
 col etime format 9,999,999.99
+col execs FORMAT 9999
+COL i FORMAT 9
 
+PROMPT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PROMPT |SHORT  | LONG           | 
+PROMPT | (ET)  | execution time | seconds
+PROMPT | (I)   | instance number| int
+PROMPT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PROMPT
 COL sqlid HEADING "sql_id|plan_hash" FORMAT A13
 
-SELECT /* sq9mcp */ sql_id||'  '||plan_hash_value sqlid, child_number, inst_id ins,
+
+SELECT /* sq9mcp */ sql_id||'  '||plan_hash_value sqlid, child_number,
+    inst_id i,
 	executions excs, elapsed_time/1000000 etime,
 	(elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions) avg_etime,
 	u.username, sql_fulltext
