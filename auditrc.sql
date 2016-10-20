@@ -1,9 +1,9 @@
 
 /*
-   zeby ten skrypt mial sens, audit musi byc wlaczony oraz
-   wygladac nastepujaco:
+   The audit has to be activated prior running the script and
+   nees to look alike:
 
-   SYS@PROD2> select * from dba_stmt_audit_opts;
+   SYS> SELECT * FROM dba_stmt_audit_opts;
    USER_NAME  PROXY_N AUDIT_OPTION         SUCCESS    FAILURE
    ---------- ------- -------------------- ---------- ----------
    [...]
@@ -12,7 +12,7 @@
                       CREATE USER          BY ACCESS  BY ACCESS
    [...]
 
-   SYS@PROD2> audit alter user by access;
+   SYS> AUDIT ALTER USER BY ACCESS;
    
 */
 
@@ -64,19 +64,20 @@ ALTER SESSION SET NLS_DATE_FORMAT='HH24:MI DD.MM';
 SET TERMOUT ON
 
 PROMPT
-PROMPT Pokazuje wszystko co ma returncode <> 0
-PROMPT w ciagu ostatniego tygodnia
-PROMPT UWAGA! SYS NIE MOZE BYC AUDYTOWANY!
+PROMPR Presents everything with returncode <> 0
+PROMPT occuring in the last week.
+PROMPT Alas! SYS is not audited!
 
-SELECT	username, os_username||'@'||nvl(terminal,userhost) as "WHERE", obj_name, returncode,
-	timestamp, priv_used
-FROM dba_audit_trail
-WHERE returncode<>0 AND timestamp > current_timestamp - INTERVAL '7' DAY
-ORDER BY timestamp DESC
-/
+SELECT	username, os_username||'@'||NVL(terminal,userhost) AS "WHERE",
+        obj_name, returncode, timestamp, priv_used
+   FROM dba_audit_trail
+     WHERE returncode<>0
+       AND timestamp > current_timestamp - INTERVAL '7' DAY
+   ORDER BY timestamp DESC;
 
 COL PRIV_USED CLEAR
 COL ACTION_NAME CLEAR
 COL OBJ_NAME CLEAR
 SET FEEDBACK ON
 PROMPT
+

@@ -22,14 +22,18 @@ SELECT	ss.snap_id,
 	begin_interval_time,
 	sql_id,
 	plan_hash_value,
-	nvl(executions_delta,0) execs,
-       ( elapsed_time_delta/decode( nvl(executions_delta,0),0,1,executions_delta ) )/1000000 avg_etime,
-       (buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
-FROM DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
-	WHERE sql_id = nvl('&sql_id','4dqs2k5tynk61')
-	AND ss.snap_id = S.snap_id
-	AND ss.instance_number = S.instance_number
-	AND executions_delta > 0
+	NVL(executions_delta,0) execs,
+    (elapsed_time_delta /
+         DECODE( NVL(executions_delta,0),
+                 0,1,executions_delta ) )/1000000 avg_etime,
+    (buffer_gets_delta/
+         DECODE(NVL(buffer_gets_delta,0),
+                 0,1,executions_delta)) avg_lio
+  FROM dba_hist_sqlstat S, dba_hist_snapshot SS
+	WHERE sql_id = NVL('&sql_id','4dqs2k5tynk61')
+	  AND ss.snap_id = S.snap_id
+	  AND ss.instance_number = S.instance_number
+	  AND executions_delta > 0
 ORDER BY 1, 2, 3
 /
 
