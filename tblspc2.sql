@@ -23,6 +23,10 @@ prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- z dba_free_space zamiast z dba_extents
 --
 --
+
+BREAK ON REPORT
+COMPUTE SUM LABEL "total GB" OF TSSIZE ON REPORT
+
 SELECT a.tablespace_name tname,
         substr(decode(a.status, 'ONLINE', 'ONL',
                 'OFFLINE', 'OFF', 'READ ONLY', 'R/O',
@@ -62,23 +66,5 @@ SELECT a.tablespace_name tname,
 FROM dba_tablespaces a
 /
 
-
---select  a.tablespace_name,
---	round(
---	(	select sum(bytes)
---		from dba_extents
---		where tablespace_name=a.tablespace_name
---	)/decode(a.contents||a.allocation_type,
---                'TEMPORARYUNIFORM',
---                (select sum(bytes)
---                from dba_temp_files
---                where tablespace_name = a.tablespace_name),
---                (select sum(bytes)
---                from dba_data_files
---                where tablespace_name = a.tablespace_name)
---        )*100) BSY
---        from dba_tablespaces a
---
---/
-SET NUMWIDTH 10
+CLEAR BREAKS
 COLUMN BSY CLEAR

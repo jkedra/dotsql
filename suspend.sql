@@ -12,4 +12,7 @@ FROM gv$session_event
 WHERE event LIKE '%suspend%';
 */
 
+SET LINES 120
+COL error_msg FORMAT A20
+COL name FORMAT A30
 select session_id,status,timeout,name,error_msg from dba_resumable;
