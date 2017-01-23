@@ -11,6 +11,7 @@ SELECT * FROM (
     FROM dba_segments
     WHERE tablespace_name LIKE '&vtabsp'
     GROUP BY owner,segment_type,segment_name
-    ORDER BY 3 DESC
-) WHERE rownum <11;
+    ORDER BY mb DESC
+) WHERE rownum <11
+ORDER BY mb DESC;
 
