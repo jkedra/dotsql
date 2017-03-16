@@ -1,3 +1,4 @@
+SET NUMWIDTH 8
 set lines 160
 col name format a15
 

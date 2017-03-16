@@ -3,6 +3,9 @@ col username format a10
 col tablespace format a10
 col osuser format a10
 
+BREAK ON REPORT
+COMPUTE SUM LABEL "total MB" OF size_mb ON REPORT
+
 SELECT   b.TABLESPACE
        , b.segfile#
        , b.segblk#
@@ -25,3 +28,4 @@ ORDER BY b.TABLESPACE
        , b.segblk#
        , b.blocks;
 
+CLEAR BREAKS

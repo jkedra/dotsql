@@ -4,13 +4,15 @@
 col gname form a10
 col dbname form a10
 col file_type form a14
+SET VERIFY OFF
+
+BREAK ON REPORT
+COMPUTE SUM LABEL "total GB" OF GB ON REPORT
 
 SELECT
     dbname,
     gname,
-    file_type,
-    round(SUM(space)/1024/1024) mb,
-    round(SUM(space)/1024/1024/1024) gb,
+    round(SUM(space)/1024/1024/1024,1) GB,
     COUNT(*) "#FILES"
 FROM
     (
@@ -52,7 +54,8 @@ FROM
                             a.group_number = b.group_number
                         AND a.group_number = c.group_number(+)
                         AND a.file_number = c.file_number(+)
-                        AND a.file_incarnation = c.incarnation(+) ) START WITH (mod(pindex, power(2, 24))) = 0
+                        AND a.file_incarnation = c.incarnation(+) 
+                        AND b.name=UPPER('&asmgroup')) START WITH (mod(pindex, power(2, 24))) = 0
                 AND rindex IN
                     (
                         SELECT
@@ -68,15 +71,13 @@ FROM
         WHERE
             NOT file_type IS NULL
             and system_created = 'Y' )
-WHERE
-    gname=UPPER('&asmgroup')
 GROUP BY
     dbname,
-    gname,
-    file_type
+    gname
 ORDER BY
+    GB DESC,
     dbname,
-    gname,
-    file_type
+    gname
 /
 
+CLEAR BREAKS
