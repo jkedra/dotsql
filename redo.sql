@@ -4,6 +4,7 @@ COL thread# FORMAT 9  HEADING "T"
 COL MB FORMAT 9999
 COL status FORMAT A6
 COL instance FORMAT A12
+SET LINES 120
 
 SELECT a.group#, a.thread#, t.instance,
        a.bytes/1024/1024 MB,
