@@ -1,3 +1,6 @@
+COL privilege FORMAT A30
 
-select privilege,admin_option adm from dba_sys_privs where grantee=UPPER('&1')
+SELECT privilege,admin_option adm
+FROM dba_sys_privs WHERE grantee=UPPER('&1')
+ORDER BY privilege ASC
 /
