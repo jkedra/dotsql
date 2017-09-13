@@ -3,6 +3,11 @@
 --
 -- Jerzy Kedra
 --
+SET LINES 160
+SET VERIFY OFF
+COL text FORMAT A80 WORD WRAPPED
+COL lno  FORMAT 9999
+
 WITH b AS (
 SELECT min(line) line,name, type FROM (
     SELECT min(line) line,
