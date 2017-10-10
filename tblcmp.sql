@@ -82,7 +82,7 @@ UNION
                WHERE table_name = UPPER('&vtable')
                  AND owner= UPPER(NVL('&vschema','TASDBA'))
 )               
-ORDER BY 8;
+ORDER BY 2,1;
 
 PROMPT == unusual column properties ==
 SELECT c.name, c.property
