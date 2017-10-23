@@ -14,11 +14,11 @@ PROMPT | E = EXPIRED AND LOCKED |              |                     |
 PROMPT | G = EXPIRED(GRACE)     |              |                     |
 PROMPT +=============================================================+
 PROMPT 
-SET DEFINE OFF
+SET ESCAPE ON
 SELECT username, profile, default_tablespace, temporary_tablespace,
        DECODE(account_status,
                     'OPEN', 'O',
-                    'EXPIRED & LOCKED', 'E',
+                    'EXPIRED \& LOCKED', 'E',
                     'EXPIRED(GRACE)', 'G',
                     account_status) S,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
@@ -27,4 +27,3 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
    WHERE expiry_date > SYSDATE-180
       OR expiry_date IS NULL;
 
-SET DEFINE ON
