@@ -64,7 +64,7 @@ ALTER SESSION SET NLS_DATE_FORMAT='HH24:MI DD.MM';
 SET TERMOUT ON
 
 PROMPT
-PROMPR Presents everything with returncode <> 0
+PROMPT Presents everything with returncode <> 0
 PROMPT occuring in the last week.
 PROMPT Alas! SYS is not audited!
 
