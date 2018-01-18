@@ -1,7 +1,11 @@
-col program format a20
+col program format a30
 col username format a10
 col tablespace format a10
 col osuser format a10
+COL SID FORMAT 9999
+COL SIZE_MB FORMAT 9999999
+
+SET LINES 160
 
 BREAK ON REPORT
 COMPUTE SUM LABEL "total MB" OF size_mb ON REPORT
@@ -24,8 +28,13 @@ SELECT   b.TABLESPACE
      AND a.saddr = b.session_addr
      AND a.paddr = c.addr
 ORDER BY b.TABLESPACE
+       , b.blocks DESC
        , b.segfile#
-       , b.segblk#
-       , b.blocks;
+       , b.segblk#;
+
+
+COL tablespace_name FORMAT A20
+SELECT inst_id, tablespace_name, total_blocks, used_blocks, free_blocks
+    FROM gv$sort_segment;
 
 CLEAR BREAKS
