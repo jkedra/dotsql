@@ -24,7 +24,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd
    FROM dba_users
-   WHERE username  IN ('SG891757', 
+   WHERE username  IN ('SG891757', 'SG899382',
                         'TASDBA', 'TASGEN', 'TASADMIN',
                         'ASDM', 'AUTOUSER')
 /
