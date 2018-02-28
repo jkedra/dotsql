@@ -22,7 +22,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'EXPIRED \& LOCKED', 'E',
                     'LOCKED', 'L',
                     'EXPIRED(GRACE)', 'G',
-                    'LOCKED(TIMED)', 'T',
+                    'LOCKED(TIMED) ', 'T',
                     account_status) S,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd

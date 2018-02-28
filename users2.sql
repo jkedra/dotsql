@@ -1,6 +1,6 @@
 SET LINES 160
 COL username FORMAT A16
-COL profile FORMAT A16
+COL profile FORMAT A17
 COL s FORMAT A1
 COL default_tablespace HEADING 'tblspc' FORMAT A10
 COL temporary_tablespace HEADING 'tempspc' FORMAT A10
@@ -20,12 +20,16 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'OPEN', 'O',
                     'EXPIRED \& LOCKED', 'E',
                     'EXPIRED(GRACE)', 'G',
+                    'LOCKED(TIMED)', 'T',
                     account_status) S,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd
    FROM dba_users
    WHERE username  IN ('SG891757', 'SG899382',
                         'TASDBA', 'TASGEN', 'TASADMIN',
-                        'ASDM', 'AUTOUSER')
+                        'ASDM', 'AUTOUSER',
+                        'ZABBIX')
+    OR REGEXP_LIKE(username, '..\(WEB|BAT\).$')
+ORDER BY username, profile
 /
 SET ESCAPE OFF
