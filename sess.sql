@@ -7,7 +7,7 @@ col action   FORMAT A20
 SELECT username, sid||','||serial# sidser,
 	ROUND(seconds_in_wait/60,0) waitmins,
 	machine,osuser,action
-FROM v$session
+FROM gv$session
 WHERE username IS NOT NULL
 ORDER BY username,waitmins;
 

@@ -1,13 +1,24 @@
 -- DESC:	script to synchronize sequences between Prod and cert databases.
--- author: 	tomasz.antonik
--- date: 	2012.07.12
--- usage: 	@sync_seq <prod_sid> 
+-- authors: tomasz.antonik, Jurek Kedra
+-- date: 	2012-2017
 
 set feedback off
 set lines 120
 SET PAGES 0
 
-spool sync_sequences_result.sql
+-- GLOBAL_NAME     (capital let)
+-- GLOBAL_NAME_LOW (low letters)
+-- SCHEMA_NAME_LOW (low letters)
+COL p1 NEW_VALUE GLOBAL_NAME
+COL p2 NEW_VALUE GLOBAL_NAME_LOW
+SELECT REGEXP_REPLACE(global_name,'\..*') p1,
+       LOWER(REGEXP_REPLACE(global_name,'\..*')) p2
+    FROM global_name;
+COL p1 CLEAR
+COL p2 CLEAR
+
+
+SPOOL sync_sequences_&GLOBAL_NAME..sql
 
 prompt SET SERVEROUT ON
 prompt 
@@ -57,9 +68,5 @@ spool off
 -- connect to dev/cert db as tasgen and run it
 -- set serveroutput on;
 -- @script.sql
-
-
-
-
 
 
