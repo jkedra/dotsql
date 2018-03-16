@@ -5,22 +5,26 @@
 --
 /*
 
-    SELECT owner, table_name, constraint_name fk,
-            (SELECT LISTAGG(column_name, ', ')
-                        WITHIN GROUP (ORDER BY position) fk_cols
-             FROM all_cons_columns
-             WHERE owner=c.owner AND constraint_name=c.constraint_name
-             GROUP BY constraint_name) fk_cols,
-           delete_rule,
-           r_owner r_own, r_constraint_name r_constr,
-            (SELECT LISTAGG(column_name, ', ')
-                        WITHIN GROUP (ORDER BY position) fk_cols
-             FROM all_cons_columns
-             WHERE owner=c.r_owner AND constraint_name=c.r_constraint_name
-             GROUP BY constraint_name) r_constr_cols       
-    FROM all_constraints c
-        WHERE constraint_type='R'
-          AND owner='&table_owner' AND table_name='&table_name';
+SELECT owner, constraint_name fk,
+        table_name,
+        (SELECT LISTAGG(column_name, ', ')
+                    WITHIN GROUP (ORDER BY position) fk_cols
+         FROM all_cons_columns
+         WHERE owner=c.owner AND constraint_name=c.constraint_name
+         GROUP BY constraint_name) fk_cols,
+       delete_rule,
+       r_owner r_own, r_constraint_name r_constr,
+        (SELECT table_name FROM all_cons_columns
+         WHERE owner=c.r_owner AND constraint_name=c.r_constraint_name
+         GROUP BY table_name) r_table,
+        (SELECT LISTAGG(column_name, ', ')
+                    WITHIN GROUP (ORDER BY position) fk_cols
+         FROM all_cons_columns
+         WHERE owner=c.r_owner AND constraint_name=c.r_constraint_name
+         GROUP BY constraint_name) r_constr_cols
+FROM all_constraints c
+    WHERE constraint_type='R'
+         AND owner='&table_owner' AND table_name='&table_name';
 
 */
 
