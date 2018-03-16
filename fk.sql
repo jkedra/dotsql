@@ -3,6 +3,27 @@
 -- it shows FK for given table 
 -- shows also parent tables and columns
 --
+/*
+
+    SELECT owner, table_name, constraint_name fk,
+            (SELECT LISTAGG(column_name, ', ')
+                        WITHIN GROUP (ORDER BY position) fk_cols
+             FROM all_cons_columns
+             WHERE owner=c.owner AND constraint_name=c.constraint_name
+             GROUP BY constraint_name) fk_cols,
+           delete_rule,
+           r_owner r_own, r_constraint_name r_constr,
+            (SELECT LISTAGG(column_name, ', ')
+                        WITHIN GROUP (ORDER BY position) fk_cols
+             FROM all_cons_columns
+             WHERE owner=c.r_owner AND constraint_name=c.r_constraint_name
+             GROUP BY constraint_name) r_constr_cols       
+    FROM all_constraints c
+        WHERE constraint_type='R'
+          AND owner='&table_owner' AND table_name='&table_name';
+
+*/
+
 set serveroutput on feedback off
 
 set echo off
