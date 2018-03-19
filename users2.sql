@@ -18,6 +18,7 @@ SET ESCAPE ON
 SELECT username, profile, default_tablespace, temporary_tablespace,
        DECODE(account_status,
                     'OPEN', 'O',
+                    'LOCKED', 'L',
                     'EXPIRED \& LOCKED', 'E',
                     'EXPIRED(GRACE)', 'G',
                     'LOCKED(TIMED)', 'T',
@@ -26,7 +27,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd
    FROM dba_users
    WHERE username  IN ('SG891757', 'SG899382',
-                        'TASDBA', 'TASGEN', 'TASADMIN',
+                        'TASDBA', 'TASGEN', 'TASUSR', 'TASADMIN',
                         'ASDM', 'AUTOUSER',
                         'ZABBIX')
     OR REGEXP_LIKE(username, '..\(WEB|BAT\).$')
