@@ -7,7 +7,7 @@ col username format a13
 col prog format a22
 
 
-COL sql_text FORMAT A120
+COL sql_text FORMAT A120 WORD_WRAPPED
 
 col sql_full format a130 word_wrapped
 col sql_fulltext format A100 word_wrapped
@@ -26,7 +26,6 @@ col etime format 9,999,999.99
 --and sql_text not like '%from v$sql where sql_text like nvl(%'
 --and sql_id like nvl('&sql_id',sql_id)
 --and u.user_id = s.parsing_user_id
-
 
 SELECT sql_text FROM dba_hist_sqltext
 WHERE sql_id='&sql_id'
