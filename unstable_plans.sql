@@ -78,7 +78,7 @@ SELECT * FROM (
     GROUP BY sql_id, stddev_etime
 )
 WHERE norm_stddev > NVL(TO_NUMBER('&min_stddev'),2)
-AND max_etime > nvl(to_number('&max_etime'),.1)
+AND max_etime > nvl(to_number('&min_maxetime'),.1)
 --ORDER BY norm_stddev
 ORDER BY norm_stddev*execs
 /
