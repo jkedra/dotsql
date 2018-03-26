@@ -23,9 +23,10 @@ col min_etime HEADING "min_etime|[seconds]" for 999,999.99
 col max_etime HEADING "max_etime|[seconds]" for 999,999.99
 col avg_etime HEADING "avg_etime|[seconds]" for 999,999.999
 col avg_lio for 999,999,999.9
-col norm_stddev HEADING "norm_stddev|etime"for 999,999.9999 
+col norm_stddev HEADING "norm_stddev|etime" for 999,999.9999 
 col begin_interval_time for a30
-col node for 99999
+COL node FORMAT 9 HEADING #
+COL snap_id FORMAT 999999
 break on plan_hash_value on startup_time skip 1
 
 -- DBA_HIST_SQLSTAT

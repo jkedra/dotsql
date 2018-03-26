@@ -25,6 +25,10 @@ col plan_hash_value format 9999999999
 --  Delta number of executions that took place on this object
 --  since it was brought into the library cache
 
+COL snap_id FORMAT 999999
+COL execs FORMAT 99999
+COL node FORMAT 9 HEADING #
+
 PROMPT avg_etime in seconds
 ACCEPT vdays CHAR DEFAULT 14 PROMPT "days [14]: "
 
@@ -32,7 +36,7 @@ BREAK ON plan_hash_value ON startup_time skip 1
 
 SELECT	ss.snap_id,
 	ss.instance_number node,
-	begin_interval_time,
+	TO_CHAR(begin_interval_time, 'DD.MM.YYYY HH24:MI') begin_time,
 	sql_id,
 	plan_hash_value,
 	NVL(executions_delta,0) execs,
