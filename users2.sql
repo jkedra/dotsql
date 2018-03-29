@@ -30,7 +30,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                         'TASDBA', 'TASGEN', 'TASUSR', 'TASADMIN',
                         'ASDM', 'AUTOUSER',
                         'ZABBIX')
-    OR REGEXP_LIKE(username, '..\(WEB|BAT\).$')
+    OR REGEXP_LIKE(username, '..(WEB|BAT).$')
 ORDER BY username, profile
 /
 SET ESCAPE OFF

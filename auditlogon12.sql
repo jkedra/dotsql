@@ -8,6 +8,14 @@ COL error FORMAT A30
 SET LINES 160
 SET VERIFY OFF
 
+COL value FORMAT A10
+COL parameter FORMAT A40
+PROMPT UNIFIED AUDITING?
+SELECT parameter, value
+    FROM v$option
+    WHERE parameter LIKE '%Auditing%';      
+
+
 ACCEPT vhours NUMBER DEFAULT 1 PROMPT "hours back [1]: " 
       
 SELECT dbusername, os_username, userhost, client_program_name,
@@ -17,8 +25,8 @@ SELECT dbusername, os_username, userhost, client_program_name,
            return_code) error
 FROM sys.UNIFIED_AUDIT_TRAIL
     WHERE action_name='LOGON'
-      AND (dbusername  IN ('TASGEN', 'ASDM', 'AUTOUSER', 'ZABBIX')
-           OR REGEXP_LIKE(dbusername, '..\(WEB|BAT\).$'))
+      AND (dbusername  IN ('TASUSR', 'TASGEN', 'ASDM', 'AUTOUSER', 'ZABBIX')
+           OR REGEXP_LIKE(dbusername, '..(WEB|BAT).$'))
       AND return_code<>0
       AND event_timestamp > SYSTIMESTAMP-&vhours./24
       ORDER BY event_timestamp DESC;   
