@@ -1,6 +1,6 @@
 SET LINES 160
 COL username FORMAT A16
-COL profile FORMAT A17
+COL profile FORMAT A18
 COL s FORMAT A1
 COL default_tablespace HEADING 'tblspc' FORMAT A10
 COL temporary_tablespace HEADING 'tempspc' FORMAT A10
