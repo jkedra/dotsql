@@ -20,6 +20,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'OPEN', 'O',
                     'LOCKED', 'L',
                     'EXPIRED \& LOCKED', 'E',
+                    'EXPIRED',           'E',
                     'EXPIRED(GRACE)', 'G',
                     'LOCKED(TIMED)', 'T',
                     account_status) S,
@@ -31,6 +32,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                         'ASDM', 'AUTOUSER',
                         'ZABBIX')
     OR REGEXP_LIKE(username, '..(WEB|BAT).$')
+    OR REGEXP_LIKE(username, '^LPS.*')
 ORDER BY username, profile
 /
 SET ESCAPE OFF
