@@ -29,7 +29,8 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd
    FROM dba_users
    WHERE expiry_date > SYSDATE-180
-      OR expiry_date IS NULL;
+      OR expiry_date IS NULL
+   ORDER BY username;
 
 SET ESCAPE OFF
 

@@ -12,12 +12,13 @@ PROMPT STATUS
 PROMPT A = ACTIVE
 PROMPT I = INACTIVE
 PROMPT K = KILLED
+PROMPT S = SNIPED
 
 SELECT username,
     DECODE(status, 'ACTIVE', 'A',
                    'INACTIVE', 'I',
                    'KILLED', 'K',
-                   'SNIPPED', 'S', status) status,
+                   'SNIPED', 'S', status) status,
                      inst_id, sid||','||serial# sidser,
 	SUBSTR(machine,1,10) machine, process,
     SUBSTR(program,1,15) program,  osuser,
