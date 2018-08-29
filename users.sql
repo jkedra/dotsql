@@ -12,7 +12,7 @@ PROMPT | O = OPEN               | YYYYMMDD     | EXPD  = EXPIRY DATE |
 PROMPT | L = LOCKED             |              |                     |
 PROMPT | E = EXPIRED AND LOCKED |              |                     |
 PROMPT | G = EXPIRED(GRACE)     |              |                     |
-PROMPT | T = EXPIORE(TIMED)     |              |                     |
+PROMPT | T = LOCKED(TIMED)      |              |                     |
 PROMPT +=============================================================+
 PROMPT 
 SET ESCAPE ON
@@ -23,7 +23,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'LOCKED', 'L',
                     'EXPIRED(GRACE)', 'G',
                     'EXPIRED', 'E',
-                    'LOCKED(TIMED) ', 'T',
+                    'LOCKED(TIMED)', 'T',
                     account_status) S,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd

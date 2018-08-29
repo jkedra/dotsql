@@ -12,6 +12,7 @@ PROMPT | O = OPEN               | YYYYMMDD     | EXPD  = EXPIRY DATE |
 PROMPT | L = LOCKED             |              |                     |
 PROMPT | E = EXPIRED AND LOCKED |              |                     |
 PROMPT | G = EXPIRED(GRACE)     |              |                     |
+PROMPT | T = LOCKED(TIMED)      |              |                     |
 PROMPT +=============================================================+
 PROMPT 
 SET ESCAPE ON
