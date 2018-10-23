@@ -23,7 +23,7 @@ BREAK ON profile
 SELECT profile,resource_name,limit
 	FROM dba_profiles
 	WHERE profile IN ('MONITORING_PROFILE','DEFAULT', 'AMQ')
-		OR profile LIKE 'SABRE%'
+		OR profile LIKE 'SABRE%' OR profile LIKE 'LM%'
 	ORDER by profile,resource_name;
 
 

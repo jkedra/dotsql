@@ -12,6 +12,7 @@ PROMPT | O = OPEN               | YYYYMMDD     | EXPD  = EXPIRY DATE |
 PROMPT | L = LOCKED             |              |                     |
 PROMPT | E = EXPIRED AND LOCKED |              |                     |
 PROMPT | G = EXPIRED(GRACE)     |              |                     |
+PROMPT | T = LOCKED(TIMED)      |              |                     |
 PROMPT +=============================================================+
 PROMPT 
 SET ESCAPE ON
@@ -20,6 +21,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'OPEN', 'O',
                     'LOCKED', 'L',
                     'EXPIRED \& LOCKED', 'E',
+                    'EXPIRED',           'E',
                     'EXPIRED(GRACE)', 'G',
                     'LOCKED(TIMED)', 'T',
                     account_status) S,
@@ -31,6 +33,8 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                         'ASDM', 'AUTOUSER',
                         'ZABBIX')
     OR REGEXP_LIKE(username, '..(WEB|BAT).$')
+    OR REGEXP_LIKE(username, '^LPS.*')
+    OR username IN ('ACTIVE_MQ', 'AT', 'ATGUEST', 'COMM')
 ORDER BY username, profile
 /
 SET ESCAPE OFF

@@ -12,7 +12,7 @@ PROMPT | O = OPEN               | YYYYMMDD     | EXPD  = EXPIRY DATE |
 PROMPT | L = LOCKED             |              |                     |
 PROMPT | E = EXPIRED AND LOCKED |              |                     |
 PROMPT | G = EXPIRED(GRACE)     |              |                     |
-PROMPT | T = EXPIORE(TIMED)     |              |                     |
+PROMPT | T = LOCKED(TIMED)      |              |                     |
 PROMPT +=============================================================+
 PROMPT 
 SET ESCAPE ON
@@ -22,13 +22,15 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                     'EXPIRED \& LOCKED', 'E',
                     'LOCKED', 'L',
                     'EXPIRED(GRACE)', 'G',
-                    'LOCKED(TIMED) ', 'T',
+                    'EXPIRED', 'E',
+                    'LOCKED(TIMED)', 'T',
                     account_status) S,
             TO_CHAR(lock_date,   'YYYYMMDD') lockd,
             TO_CHAR(expiry_date, 'YYYYMMDD') expd
    FROM dba_users
    WHERE expiry_date > SYSDATE-180
-      OR expiry_date IS NULL;
+      OR expiry_date IS NULL
+   ORDER BY username;
 
 SET ESCAPE OFF
 
