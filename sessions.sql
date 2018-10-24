@@ -1,9 +1,11 @@
 col sidser format a10
 col username format a12
 col machine format A10
+
 COL process FORMAT A15
 COL osuser FORMAT A10
 COL program FORMAT A16
+
 COL status FORMAT A1
 COL inst_id FORMAT 9 HEADING 'i'
 SET LINES 120
