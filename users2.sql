@@ -34,6 +34,7 @@ SELECT username, profile, default_tablespace, temporary_tablespace,
                         'ZABBIX')
     OR REGEXP_LIKE(username, '..(WEB|BAT).$')
     OR REGEXP_LIKE(username, '^LPS.*')
+    OR username IN ('ACTIVE_MQ', 'AT', 'ATGUEST', 'COMM')
 ORDER BY username, profile
 /
 SET ESCAPE OFF

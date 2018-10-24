@@ -7,6 +7,8 @@ COL owner FORMAT A15
 COL privs FORMAT A40 WORD_WRAPPED
 COL table_name FORMAT A30
 
+COL privilege FORMAT A30
+
 PROMPT dba_role_privs
 SELECT granted_role FROM dba_role_privs WHERE grantee='&&role';
 PROMPT dba_sys_privs
