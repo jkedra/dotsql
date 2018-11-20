@@ -1,6 +1,6 @@
 -- vim:ts=4
 SET lines 160
-SET NUMWIDTH 3
+SET NUMWIDTH 4
 col sidser format a10
 col username format a12
 col host_name format a10

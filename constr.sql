@@ -8,6 +8,8 @@ SET SERVEROUTPUT ON
 col CONSTRAINT_NAME FORMAT A12
 col SEARCH_CONDITION FORMAT A30
 
-select constraint_name,constraint_type,search_condition,status from user_constraints where table_name='&table'
+SELECT constraint_name,constraint_type,search_condition,status
+FROM user_constraints
+WHERE table_name='&table'
 /
 

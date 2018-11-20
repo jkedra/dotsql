@@ -13,6 +13,7 @@ SPOOL /tmp/killaws-out.sql REPLACE
 SELECT 'BEGIN'||CHR(10)||
        'RDSADMIN.RDSADMIN_UTIL.KILL(sid=>'||sid||', serial=>' ||serial#||
             ');'||CHR(10)||
+       'RDSADMIN.RDSADMIN_UTIL.DISCONNECT('||sid||', '||serial#||');'||CHR(10)||
        'END;'||CHR(10)|| '/'
     FROM gv$session
 WHERE username=UPPER('&username');
