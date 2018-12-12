@@ -1,6 +1,7 @@
 col sidser format a10
 col username format a12
 col machine format A10
+COL CASE FORMAT A10 HEADING 'machine'
 
 COL process FORMAT A15
 COL osuser FORMAT A10
@@ -22,8 +23,11 @@ SELECT username,
                    'KILLED', 'K',
                    'SNIPED', 'S', status) status,
                      inst_id, sid||','||serial# sidser,
-	SUBSTR(machine,-10) machine, process,
-    SUBSTR(program,1,15) program,  osuser,
+CASE WHEN machine LIKE('%\%') THEN SUBSTR(machine,-10,10)
+                               ELSE SUBSTR(machine, 1,10)
+END CASE,
+	process,
+   SUBSTR(program,1,15) program,  osuser,
     TO_CHAR(logon_time, 'DDMMYY.HHMI') logon
 FROM gv$session
 WHERE username IS NOT NULL
