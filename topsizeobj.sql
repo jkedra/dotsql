@@ -1,5 +1,5 @@
-SELECT rownum,table_name,total_size_MB FROM (
-SELECT table_name, (    SELECT ROUND(SUM(NVL(bytes,0))/1024/1024) "total MB"
+SELECT rownum,owner, table_name,total_size_MB FROM (
+SELECT table_name, owner, (    SELECT ROUND(SUM(NVL(bytes,0))/1024/1024) "total MB"
                         FROM dba_segments
                         WHERE (owner,segment_name) IN (
                             SELECT dt.owner, dt.table_name FROM dual
@@ -11,7 +11,7 @@ SELECT table_name, (    SELECT ROUND(SUM(NVL(bytes,0))/1024/1024) "total MB"
                             WHERE owner=dt.owner and table_name=dt.table_name
                         )
                   ) total_size_MB
-FROM dba_tables dt WHERE owner IN ('TASDBA', 'ASDM') AND temporary='N'
-ORDER BY 2 DESC NULLS LAST
+FROM dba_tables dt WHERE (owner LIKE 'LPS_%' OR owner IN ('COMM', 'AT', 'ACTIVE_MQ')) AND temporary='N'
+ORDER BY 3 DESC NULLS LAST
 ) WHERE ROWNUM<11;
 

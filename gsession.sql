@@ -8,9 +8,12 @@ COL inst_id FORMAT 99 HEADING 'i'
 SET LINES 120
 
 SELECT username,status,inst_id, sid||','||serial# sidser,
-	SUBSTR(machine,1,10) machine, process, program, osuser,
+SUBSTR(machine,1,10) machine, process, program, osuser,
     TO_CHAR(logon_time, 'DDMMYY.HHMM') logon
 FROM gv$session
 WHERE username='&username'
 /
 
+--    CASE WHEN machine LIKE('%\\%') THEN SUBSTR(machine,-1,10)
+--                                   ELSE SUBSTR(machine,1,10)
+	
