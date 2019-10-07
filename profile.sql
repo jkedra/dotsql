@@ -10,6 +10,7 @@ SELECT username,profile,account_status,lock_date,expiry_date
 		OR username LIKE 'TAS%'
 		OR username LIKE 'AA%'
 		OR username LIKE 'ASV%'
+        OR username LIKE 'LPS%'
 		OR username IN ('OEMDEFAULT', 'ASDM', 'AUTOUSER');
 
 SELECT DISTINCT profile
