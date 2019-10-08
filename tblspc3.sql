@@ -1,5 +1,5 @@
-REM tablespace usage:
-REM sizes IN GB
+PROMPT tablespace usage:
+PROMPT sizes IN GB
 
 SELECT um.tablespace_name, ROUND(um.used_space * ts.block_size/1024/1024/1024) used,
                         ROUND(um.tablespace_size * ts.block_size/1024/1024/1024) maxsize,
