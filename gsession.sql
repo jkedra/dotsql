@@ -9,7 +9,7 @@ SET LINES 120
 
 SELECT username,status,inst_id, sid||','||serial# sidser,
 SUBSTR(machine,1,10) machine, process, program, osuser,
-    TO_CHAR(logon_time, 'DDMMYY.HHMM') logon
+    TO_CHAR(logon_time, 'DDMMYY.HH24MM') logon
 FROM gv$session
 WHERE username='&username'
 /
