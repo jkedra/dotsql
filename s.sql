@@ -28,7 +28,7 @@ CASE WHEN machine LIKE('%\%') THEN SUBSTR(machine,-10,10)
 END CASE,
 	process,
    SUBSTR(program,1,15) program,  osuser,
-    TO_CHAR(logon_time, 'DDMMYY.HHMI') logon
+    TO_CHAR(logon_time, 'DDMMYY.HH24MI') logon
 FROM gv$session
 WHERE username IS NOT NULL
     AND username NOT IN ('SYS', 'DBSNMP', 'WATCH4NET')
