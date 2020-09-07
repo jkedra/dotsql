@@ -47,11 +47,29 @@ select user||'@'|| substr(global_name,1,
 	decode(dot, 0, length(global_name), dot-1) ) global_name
 	from (select global_name, instr(global_name,'.') dot from global_name);
 */
-select user||'@'|| substr(instance_name,1,
-	-- jezeli INSTR nie znajdzie "." (dot=0) to substr nie obcina - pelna dlugosc
+
+/*
+SELECT USER||'@'|| SUBSTR(instance_name,1,
+	-- jezeli INSTR nie znajdzie "." (dot=0)
+    -- to substr nie obcina - pelna dlugosc
 	-- jezeli INSTR znajdzie kropke, obetnij string przed nia
-	decode(dot, 0, length(instance_name), dot-1) ) global_name
-	from (select instance_name, instr(instance_name,'.') dot from v$instance);
+	DECODE(dot, 0, LENGTH(instance_name), dot-1) ) global_name
+FROM (
+    SELECT instance_name, INSTR(instance_name,'.') dot FROM v$instance
+);
+*/
+
+SELECT USER||'@'||SYS_CONTEXT('USERENV','DB_NAME')
+       ||'['||SUBSTR(instance_name,1,
+                    DECODE(dot,
+                        0, LENGTH(instance_name),
+                        dot-1
+                    )
+              )||']' global_name
+FROM (SELECT instance_name, INSTR(instance_name,'.') dot FROM v$instance);
+
+
+
 
 set SQLPROMPT '&&gname> '
 
