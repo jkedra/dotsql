@@ -1,5 +1,16 @@
 SET LINES 120
 PROMPT LINES 120
+
+PROMPT https://docs.oracle.com/cd/B13866_04/webconf.904/b10877/timezone.htm
+ACCEPT vtz CHAR DEFAULT 'Europe/Warsaw' PROMPT "timezone  [ Europe/Warsaw ]: "
+--ACCEPT days NUMBER DEFAULT 1            PROMPT "days to look back     [ 1 ]: "
+
+
+SELECT
+  TO_CHAR(log_date AT TIME ZONE '&&vtz',
+          'YYYY-MM-DD HH24:MI') log_date,
+
+
 PROMPT
 PROMPT === ALL_SCHEDULER_JOBS ======
 PROMPT
@@ -19,10 +30,12 @@ COL last_start FORMAT A19
 SELECT ROWNUM l,owner,job_name,DECODE(state, 'SCHEDULED', 'SCH',
                                              'DISABLED', 'DIS',
                                       state) STA,
-               TO_CHAR(last_start_date, 'DDMMYY HH24:MI TZR') last_start,
+               TO_CHAR(last_start_date AT TIME ZONE '&&vtz',
+                       'DDMMYY HH24:MI TZR') last_start,
 				CAST(last_RUN_DURATION
 					AS INTERVAL DAY(1) TO SECOND(0)) last_run_dur,
-               TO_CHAR(next_run_date, 'HH24:MI') nxtst
+               TO_CHAR(next_run_date AT TIME ZONE '&&vtz',
+                       'HH24:MI') nxtst
        FROM all_scheduler_jobs
          WHERE owner IN ('AT', 'LPS', 'LPS_ACTIVE','COMM');
 

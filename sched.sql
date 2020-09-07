@@ -4,6 +4,8 @@ SET PAGES 80
 SET VERIFY OFF
 SET NUMWIDTH 6
 
+COL last_start_date FORMAT A15 WORD_WRAPPED
+COL next_start_date FORMAT A15 WORD_WRAPPED
 COL log_date FORMAT A18 WORD_WRAPPED
 COL owner    FORMAT A10 WORD_WRAPPED
 COL repeat_interval FORMAT A20 TRUNCATED
@@ -25,8 +27,8 @@ SET FEEDBACK ON
 SELECT owner, job_name, repeat_interval,
        state,
        decode(enabled, 'TRUE', 'Y', 'FALSE', 'N') enabled,
-       to_char(last_start_date, 'DDMMYY HH24:MI') last_start_date,
-       to_char(next_run_date,   'DDMMYY HH24:MI') next_start_date
+       to_char(last_start_date, 'DDMMYY HH24:MI TZR') last_start_date,
+       to_char(next_run_date,   'DDMMYY HH24:MI TZR') next_start_date
 FROM dba_scheduler_jobs
 WHERE NOT regexp_like(owner, NVL('&vownexclre', '&vownexclre_default.'));
 
