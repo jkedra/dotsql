@@ -2,7 +2,7 @@
 SET lines 160
 SET NUMWIDTH 4
 col sidser format a10
-col username format a12
+col username format a20
 col host_name format a10
 col iname FORMAT A10
 col service_name format a16

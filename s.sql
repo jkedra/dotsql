@@ -32,5 +32,6 @@ END CASE,
 FROM gv$session
 WHERE username IS NOT NULL
     AND username NOT IN ('SYS', 'DBSNMP', 'WATCH4NET')
+ORDER BY logon_time DESC
 /
 
